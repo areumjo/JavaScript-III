@@ -141,5 +141,93 @@ Humanoid.prototype.greet = function() {
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+  function Villain(att) {
+    Humanoid.call(this, att);
+    this.attack = att.attack;
+    this.defend = att.defend;
+  }
+  Villain.prototype = Object.create(Humanoid.prototype);
+  
+  
+  function Hero(att) {
+    Humanoid.call(this, att);
+    this.attack = att.attack;
+    this.defend = att.defend;
+  }
+  Hero.prototype = Object.create(Humanoid.prototype);
+  
+  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
+  Villain.prototype.dracarys = function() {
+    this.healthPoints = this.healthPoints-50;
+    console.log(`${this.name} has ${this.healthPoints} health points left`);
+   
+  }
+  Villain.prototype.healthCheck = function() {
+    if (this.healthPoints <= 0) {
+      return targaryen.destroy();
+    }
+  }
+  
+  Hero.prototype.nightWatch = function() {
+      this.healthPoints = this.healthPoints-10;
+      console.log(`${this.name} has ${this.healthPoints} health points left`);
+  }
+  Hero.prototype.healthCheck = function() {
+    if (this.healthPoints <= 0) {
+      return stark.destroy();
+    }
+  }
+  
+  
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+  const stark = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 6,
+      width: 2.5,
+      height: 180,
+    },
+    healthPoints: 50,
+    name: 'Jon Snow',
+    team: 'Winter is comming',
+    weapons: [
+      'warewolf',
+      'dagger',
+      'needle'
+    ],
+    language: 'northern',
+    attack: 10,
+    defend: 15
+  });
+  const targaryen = new Villain({
+    createdAt: new Date(),
+    dimensions: {
+      length: 5.5,
+      width: 2,
+      height: 130,
+    },
+    healthPoints: 100,
+    name: 'Daenerys Stormborn of the Targaryen',
+    team: 'Fire and Blood',
+    weapons: [
+      'dragon',
+      'dragonglass',
+      'valyrian'
+    ],
+    language: 'dothraki',
+    attack: 25,
+    defend: 1
+  });
+
+// call functions
+targaryen.dracarys();
+targaryen.healthCheck();
+
+stark.nightWatch();
+stark.nightWatch();
+stark.nightWatch();
+stark.nightWatch();
+stark.nightWatch();
+stark.healthCheck();
+ 
